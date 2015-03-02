@@ -1,0 +1,79 @@
+<apex:page showHeader="true" sidebar="true" controller="sjOverviewPageController" id="scheduledJobPage">
+    <script src="{!$Resource.jQuery}"></script>    
+    <apex:pageMessages id="pageMessages"/>
+    <apex:form >             
+        <apex:pageBlock title="Scheduled Jobs" id="pbScheduledJobs">            
+            <apex:pageBlockTable value="{!lsScheduledJobs}" var="sj" id="tbScheduledJobs">
+                <apex:column >
+                    <apex:facet name="header">{!$Label.sjEdit} / {!$Label.sjDelete}</apex:facet>                    
+                    <apex:outputLink value="/apex/sjDetailPage?id={!sj.Id}">{!$Label.sjEdit}</apex:outputLink> / 
+                    <a href="javascript:if (window.confirm('Are you sure?')) DeleteScheduledJob('{!sj.Id}');">{!$Label.sjDelete}</a>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">
+                        <input type="checkbox" id="checkAll"/>
+                        {!$ObjectType.Scheduled_Job__c.Fields.Enabled__c.Label}
+                    </apex:facet>                    
+                    <apex:inputField value="{!sj.Enabled__c}" id="editCheckbox"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">{!$ObjectType.Scheduled_Job__c.Fields.Name.Label}</apex:facet>
+                    <apex:outputField value="{!sj.Name}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">{!$ObjectType.Scheduled_Job__c.Fields.ApexClass__c.Label}</apex:facet>
+                    <apex:outputField value="{!sj.ApexClass__c}"/>
+                </apex:column>                
+                <apex:column >
+                    <apex:facet name="header">{!$ObjectType.Scheduled_Job__c.Fields.Description__c.Label}</apex:facet>
+                    <apex:outputField value="{!sj.Description__c}"/>
+                </apex:column>                
+            </apex:pageBlockTable>            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.sjUpdateScheduledJobs}" action="{!updateScheduledJobs}" reRender="tbScheduledJobs" onclick="alert('The job(s) have been updated.');"/>
+                <apex:commandButton value="{!$Label.sjScheduleNew}" action="{!createNewJob}"/> 
+            </apex:pageBlockButtons>
+            <script type="text/javascript">   
+                $(document).ready(function ()
+                {  
+                    if($("input[id*=editCheckbox]:checked").size() == $("input[id*=editCheckbox]").size())
+                    {
+                        $('#checkAll').prop('checked', true);    
+                    }
+                    else if($("input[id*=editCheckbox]:checked").size() < $("input[id*=editCheckbox]").size())
+                    {
+                        $('#checkAll').prop('checked', false);    
+                    }
+                    else if($("input[id*=editCheckbox]:checked").size() == 0)
+                    {
+                        $('#checkAll').prop('checked', false);
+                    }    
+
+                    $('input[id*=checkAll]').click(function()
+                    {
+                        $('input[id*="editCheckbox"]:checkbox').not(this).prop('checked', this.checked);     
+                    });
+
+                    $("input[id*=editCheckbox]").click(function()
+                    {
+                        if($("input[id*=editCheckbox]:checked").size() == $("input[id*=editCheckbox]").size())
+                        {
+                            $('#checkAll').prop('checked', true);    
+                        }
+                        else if($("input[id*=editCheckbox]:checked").size() < $("input[id*=editCheckbox]").size())
+                        {
+                            $('#checkAll').prop('checked', false);    
+                        }
+                        else if($("input[id*=editCheckbox]:checked").size() == 0)
+                        {
+                            $('#checkAll').prop('checked', false);
+                        }            
+                    });                
+                });
+            </script>       
+        </apex:pageBlock>  
+        <apex:actionFunction action="{!deleteJob}" name="DeleteScheduledJob" reRender="scheduledJobPage">
+            <apex:param name="jobId" value="" assignTo="{!jobId}"/>
+        </apex:actionFunction>           
+    </apex:form>        
+</apex:page>

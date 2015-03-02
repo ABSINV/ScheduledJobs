@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>sjDefaultOption</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjDefaultOption</shortDescription>
+        <value>None</value>
+    </labels>
+    <labels>
+        <fullName>sjDelete</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjDelete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>sjDuplicateApexClass</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjDuplicateApexClass</shortDescription>
+        <value>A scheduled job was already made for the chosen apex class.</value>
+    </labels>
+    <labels>
+        <fullName>sjEdit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjEdit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>sjGoToManager</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjGoToManager</shortDescription>
+        <value>Manage Jobs</value>
+    </labels>
+    <labels>
+        <fullName>sjMonthOption1Part1</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjMonthOption1Part1</shortDescription>
+        <value>Option 1: on day</value>
+    </labels>
+    <labels>
+        <fullName>sjMonthOption1Part2</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjMonthOption1Part2</shortDescription>
+        <value>of every month</value>
+    </labels>
+    <labels>
+        <fullName>sjMonthOption2Part1</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjMonthOption2Part1</shortDescription>
+        <value>Option 2: On the</value>
+    </labels>
+    <labels>
+        <fullName>sjMonthOption2Part2</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjMonthOption2Part2</shortDescription>
+        <value>of every month</value>
+    </labels>
+    <labels>
+        <fullName>sjOwnScheduler</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjOwnScheduler</shortDescription>
+        <value>Use own scheduler</value>
+    </labels>
+    <labels>
+        <fullName>sjPageTitle</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjPageTitle</shortDescription>
+        <value>Schedule a job</value>
+    </labels>
+    <labels>
+        <fullName>sjPreferredStartTime</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjPreferredStartTime</shortDescription>
+        <value>Preferred Start Time</value>
+    </labels>
+    <labels>
+        <fullName>sjSaveButton</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjSaveButton</shortDescription>
+        <value>Save scheduled job</value>
+    </labels>
+    <labels>
+        <fullName>sjScheduleNew</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjScheduleNew</shortDescription>
+        <value>Schedule new job</value>
+    </labels>
+    <labels>
+        <fullName>sjUpdateScheduledJobs</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sjUpdateScheduledJobs</shortDescription>
+        <value>Update scheduled jobs</value>
+    </labels>
+</CustomLabels>

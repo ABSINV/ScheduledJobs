@@ -1,0 +1,90 @@
+<apex:page showHeader="true" sidebar="true" controller="sjDetailPageController" id="scheduledJobPage">
+    <script type="text/javascript" src="{!$Resource.jQuery}"></script>  
+    <apex:pageMessages id="pageMessages"/>
+    <apex:form >                     
+        <apex:pageBlock title="{!$Label.sjPageTitle}">             
+            <apex:pageBlockSection id="pbsJob">
+                <apex:inputField value="{!scheduledJob.Description__c}"/>                                
+                <apex:actionRegion >
+                    <apex:pageBlockSection >                        
+                        <apex:inputCheckbox value="{!scheduledJob.Use_Own_Scheduler__c}">
+                            <apex:actionSupport reRender="pbsiBatchScheduler" event="onchange"/>
+                        </apex:inputCheckbox>
+                    </apex:pageBlockSection>
+                </apex:actionregion>            
+                
+                <apex:pageBlockSectionItem >                
+                    <apex:outputLabel value="{!$Label.sjPreferredStartTime}"/>
+                    <apex:outputPanel >
+                        <apex:inputField value="{!scheduledJob.Preferred_Start_Hour__c}"/>
+                        <apex:inputField value="{!scheduledJob.Preferred_Start_Minutes__c}"/>
+                    </apex:outputPanel>                                  
+                </apex:pageBlockSectionItem>
+            
+                <apex:pageBlockSection id="pbsiBatchScheduler">                    
+                    <apex:pageBlockSectionItem rendered="{!!scheduledJob.Use_Own_Scheduler__c}">
+                        <apex:outputLabel value="{!$ObjectType.Scheduled_Job__c.Fields.ApexClass__c.Label}"/>
+                        <apex:selectList value="{!scheduledJob.ApexClass__c}" size="1">
+                            <apex:selectOptions value="{!batchClasses}"/>
+                        </apex:selectList>                    
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!scheduledJob.Use_Own_Scheduler__c}">                    
+                        <apex:outputLabel value="Schedule Class"/>
+                        <apex:selectList value="{!scheduledJob.ApexClass__c}" size="1">
+                            <apex:selectOptions value="{!scheduleClasses}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>                
+                </apex:pageBlockSection>
+                    
+                <apex:inputField value="{!scheduledJob.Frequency__c}">
+                    <apex:actionSupport event="onchange" reRender="weekly, monthly"/>
+                </apex:inputField>                
+
+                <apex:outputPanel id="frequency">
+                    <apex:outputPanel id="weekly">
+                        <apex:outputPanel rendered="{!scheduledJob.Frequency__c == 'Weekly'}">
+                            <apex:selectCheckboxes value="{!weekdays}" rendered="{!scheduledJob.Frequency__c == 'Weekly'}">
+                                <apex:selectOptions value="{!days}"/>
+                            </apex:selectCheckboxes>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+            
+                    <apex:outputPanel ></apex:outputPanel>
+                    <apex:outputPanel id="monthly">
+                        <apex:outputPanel rendered="{!scheduledJob.Frequency__c == 'Monthly'}">
+                            <apex:selectRadio value="{!selectedMonthOption}">
+                                <apex:actionSupport reRender="monthly, frequency" event="onchange" action="{!disableMonthOption}"/> 
+                                <apex:selectOptions value="{!monthOptions}"/>
+                            </apex:selectRadio>   
+                            
+                            <apex:outputLabel >
+                                {!$Label.sjMonthOption1Part1}
+                                <apex:selectList value="{!scheduledJob.Month_Day_Number__c}" size="1" disabled="{!!disableMonthOption2}">
+                                    <apex:selectOptions value="{!MonthDayNumbers}"/>
+                                    <apex:actionSupport reRender="monthly" event="onchange"/>
+                                </apex:selectList>                                
+                                {!$Label.sjMonthOption1Part2}
+                            </apex:outputLabel>
+                            <br/>                            
+
+                            <apex:outputPanel >                              
+                                {!$Label.sjMonthOption2Part1}
+                                <apex:selectList value="{!scheduledJob.Month_Day_Name_Rank__c}" size="1" id="oppNameInput" disabled="{!disableMonthOption2}">
+                                        <apex:selectOptions value="{!monthDayNameRanks}"/>
+                                </apex:selectList>
+                                <apex:selectList value="{!scheduledJob.Month_Day_Name__c}" size="1" id="oppNameInput1" disabled="{!disableMonthOption2}">
+                                    <apex:selectOptions value="{!days}"/>
+                                </apex:selectList>
+                                {!$Label.sjMonthOption2Part2}                                
+                            </apex:outputPanel>                            
+                        </apex:outputPanel>                         
+                    </apex:outputPanel>
+                </apex:outputPanel>                       
+             </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.sjSaveButton}" action="{!scheduleJob}"/>
+                <apex:commandButton value="{!$Label.sjGoToManager}" action="{!goToManagerPage}"/>
+            </apex:pageBlockButtons>           
+        </apex:pageBlock>
+    </apex:form>       
+</apex:page>
